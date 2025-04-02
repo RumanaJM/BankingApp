@@ -191,23 +191,27 @@ public class Main {
             }
         }
     }
+//updated the login method to validate username before asking for password
+private static boolean login(Scanner scanner) {
+    System.out.println("Please enter your username: ***Cheat answer is myusername***");
+    String username = scanner.nextLine();
 
-    private static boolean login(Scanner scanner) {
-        System.out.println("Please enter your username: ***Cheat answer is myusername***");
-        String username = scanner.nextLine();
-
-        System.out.println("Please enter your password: ***Cheat answer is mypassword***");
-        String password = scanner.nextLine();
-
-        // check if the username and password are correct
-        if (username.equals("myusername") && password.equals("mypassword")) {
-            System.out.println("Login successful!");
-            return true;
-        } else {
-            System.out.println("Invalid username or password. Please try again.");
-            return false;
-        }
+    if (!username.equals("myusername")) {
+        System.out.println("Invalid username. Please try again.");
+        return false; // Immediately exits if username is incorrect
     }
+
+    System.out.println("Please enter your password: ***Cheat answer is mypassword***");
+    String password = scanner.nextLine();
+
+    if (password.equals("mypassword")) {
+        System.out.println("Login successful!");
+        return true;
+    } else {
+        System.out.println("Invalid password. Please try again.");
+        return false;
+    }
+}
 
     private static void createUserAccount(String username, String password) {
     }

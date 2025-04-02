@@ -1,4 +1,41 @@
-/.idea
-/ClassDiagram.png
-/pom.xml
-/target
+# Ignore IntelliJ IDEA project files
+/.idea/
+/*.iml
+
+# Ignore build output directories
+/target/
+/build/
+
+# Ignore Maven wrapper files
+/.mvn/
+/mvnw
+/mvnw.cmd
+
+# Ignore logs
+*.log
+
+# Ignore compiled Java files
+*.class
+
+# Ignore temporary files
+*.tmp
+*.bak
+*.swp
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore test reports
+/test-output/
+/surefire-reports/
+
+# Ignore dependency caches
+/.gradle/
+/.gradle/
+/.settings/
+/.vscode/
+
+# Ignore sensitive configuration files
+*.properties
+*.env
