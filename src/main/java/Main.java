@@ -12,6 +12,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean loggedIn = false;
 
+               
+
         // Display options to user
         System.out.println("Welcome to the Business ATM.");
         System.out.println("1. Login");
@@ -25,19 +27,7 @@ public class Main {
         if (choice == 1) {
             // Login
             loggedIn = login(scanner);
-        } else if (choice == 2) {
-            // Create account
-            System.out.print("Enter username: ");
-            String username = scanner.nextLine();
-            System.out.print("Enter password: ");
-            String password = scanner.nextLine();
-
-            // Create new user account
-            createUserAccount(username, password);
-            System.out.println("Account created successfully!");
-        } else {
-            System.out.println("Invalid input. Please try again.");
-        }
+        } 
 
         // Continue with ATM functionality if user is logged in
         if (loggedIn) {
@@ -52,7 +42,9 @@ public class Main {
                 System.out.println("4. Transfer money ***to transfer money you must add two accounts first. They " +
                         "will be named account 1 and account 2***");
                 System.out.println("5. Check balance");
-                System.out.println("6. Exit");
+                System.out.println("6. List all accounts");
+                System.out.println("7. Exit");
+                //System.out.println("8. Create a new user account");
 
                 int option = scanner.nextInt();
                 scanner.nextLine();
@@ -71,30 +63,34 @@ public class Main {
                         System.out.println("Please enter the account name:");
                         String accountName = scanner.nextLine();
 
-                        BankAccount account = null;
-
+                        BankAccount newAccount = null;
+                        
                         switch (accountType) {
                             case 1:
-                                account = new SmallBusinessAccount(accountName, Integer.toString(atm.accounts.size()
+                                newAccount = new SmallBusinessAccount(accountName, Integer.toString(atm.accounts.size()
                                         + 1), accountType);
+                                        //Displaying the account name and number after creation
+                                        System.out.println("Account Name: " + newAccount.getAccountName() + ", Account Number: " + newAccount.getAccountNumber());
                                 break;
                             case 2:
-                                account = new CommunityAccount(accountName, Integer.toString(atm.accounts.size() + 1),
+                                newAccount = new CommunityAccount(accountName, Integer.toString(atm.accounts.size() + 1),
                                         accountType);
+                                System.out.println("Account Name: " + newAccount.getAccountName() + ", Account Number: " + newAccount.getAccountNumber());
                                 break;
                             case 3:
-                                account = new ClientAccount(accountName, Integer.toString(atm.accounts.size() + 1),
+                                newAccount = new ClientAccount(accountName, Integer.toString(atm.accounts.size() + 1),
                                         accountType);
+                                System.out.println("Account Name: " + newAccount.getAccountName() + ", Account Number: " + newAccount.getAccountNumber());
                                 break;
                             default:
                                 System.out.println("Invalid account type!");
                                 break;
                         }
 
-                        if (account != null) {
-                            atm.addAccount(account);
+                        if (newAccount != null) {
+                            atm.addAccount(newAccount);
                             System.out.println("Account added successfully!");
-                            System.out.println(account);
+                            System.out.println(newAccount);
                         }
                         break;
 
@@ -179,14 +175,33 @@ public class Main {
                         }
                         break;
 
-                    case 6:
-                        System.out.println("Exiting the Business ATM system. Thank you for using our services!");
-                        System.exit(0);
+                    
+
+                    case 6: // List all accounts
+                    //System.out.println("Existing accounts:");
+                    if(atm.accounts == null || atm.accounts.isEmpty()) {
+                        System.out.println("No existing accounts");
+                    }
+                    else {
+                        System.out.println("Existing accounts:");
+                        // Loop through the list of accounts and print their details
+                        System.out.println("Existing accounts:");
+                    }
+                    for (BankAccount acc  : atm.accounts) {
+                            
+                            System.out.println("Account Name: " + acc.getAccountName() + ", Account Number: " + acc.getAccountNumber());
+                        }
                         break;
+                        
+                    case 7:
+                    System.out.println("Exiting the Business ATM system. Thank you for using our services!");
+                    System.exit(0);
+                    break;
 
                     default:
                         System.out.println("Invalid option! Please select a valid option.");
                         break;
+                        
                 }
             }
         }
@@ -252,6 +267,7 @@ private static boolean login(Scanner scanner) {
                 return account;
             }
         }
+        System.out.println("Account not found: " + accountNumber);
         return null;
     }
 }
