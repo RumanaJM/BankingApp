@@ -246,9 +246,9 @@ private static boolean login(Scanner scanner) {
 
     public boolean withdraw(String accountNumber, double amount) {
         BankAccount account = findAccount(accountNumber);
-        if (account != null && account.getBalance() >= amount) {
-            account.withdraw(amount);
-            return true;
+        if (account != null) {
+            account.withdraw(amount); // The BankAccount class handles overdraft logic
+            return true; // Assume withdrawal is successful if no exception is thrown
         }
         return false;
     }
